@@ -1,0 +1,9 @@
+<h3 class="mb-4">All Gift Cards</h3>
+
+@if (loadingGiftCards) {
+  <p>Loading gifcards...</p>
+} @else {
+  @for (giftCard of giftCards; track $index) {
+    <app-gift-card-thumnail [giftCard]="giftCard" (onBuyGiftCard)="onBuyGiftCard(giftCard)"></app-gift-card-thumnail>
+  }
+}

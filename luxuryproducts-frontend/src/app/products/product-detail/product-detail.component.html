@@ -1,0 +1,62 @@
+<section class="py-5 bg-light">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+      <div class="col-md-6 mb-5 mb-md-0">
+        <div class="product-image-container bg-white p-4 shadow-sm rounded">
+          <img class="card-img-top img-fluid" src="{{ product.imgURL }}" alt="Product Image"/>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="product-details-container bg-white p-4 shadow-sm rounded">
+          <h1 class="display-4 fw-bold mb-4">{{ product.name }}</h1>
+          <p class="fw-bold mb-2 lead">Description:</p>
+          <p class="lead mb-4">{{ product.description }}</p>
+          <p class="lead mb-4"><span class="fw-bold">Price:</span> {{ currentPrice | currency: 'EUR' }}</p>
+          <div class="product-info mb-4">
+            <p class="fw-bold mb-2">Release Date:</p>
+            <p>{{ product.releaseDate }}</p>
+          </div>
+          <div class="product-info mb-4">
+            <p class="fw-bold mb-2">Specifications:</p>
+            <p>{{ product.specifications }}</p>
+          </div>
+          <div class="product-info mb-4">
+            <p class="fw-bold mb-2">Publisher:</p>
+            <p>{{ product.publisher }}</p>
+          </div>
+          <div>
+          @for (variant of product.variants; track $index) {
+            <h3 style="margin-top: 1em;">{{variant.name}}:</h3>
+            @for (option of variant.options; track $index) {
+              <div class="btn-group" role="group">
+                @if (!option.optionsSelected) {
+                  @if (option.priceAdded === 0) {
+                    <button (click)="onChangeVariant(variant, option)" type="button" class="btn btn-outline-dark" style="margin-right: 2em; margin-bottom: 1em; width: 12em;">{{option.name}}</button>
+                  }@else {
+                    <button (click)="onChangeVariant(variant, option)" type="button" class="btn btn-outline-dark" style="margin-right: 2em; margin-bottom: 1em; width: 12em;">{{option.name}} +{{option.priceAdded | currency: 'EUR'}}</button>
+                  }
+                } @else {
+                  @if (option.priceAdded === 0) {
+                  <button (click)="onChangeVariant(variant, option)" type="button" class="btn btn-primary btn-buy" style="margin-right: 2em; margin-bottom: 1em; width: 12em;" disabled>{{option.name}}</button>
+
+                  }@else {
+                    <button (click)="onChangeVariant(variant, option)" type="button" class="btn btn-primary btn-buy" style="margin-right: 2em; margin-bottom: 1em; width: 12em;" disabled>{{option.name}} +{{option.priceAdded | currency: 'EUR'}}</button>
+                  }                }
+              </div>
+            }
+          }
+        </div>
+        <hr>
+          @if (productAvailable) {
+            <h6>stock left: {{product.stock}}</h6>
+            <button (click)="onBuyProduct()" class="btn btn-primary btn-buy">Buy Now</button>
+          } @else{
+            <h6 class="text-danger">stock left: {{product.stock}}</h6>
+            <button (click)="onBuyProduct()" class="btn btn-primary btn-buy" disabled>Buy Now</button>
+          }
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>

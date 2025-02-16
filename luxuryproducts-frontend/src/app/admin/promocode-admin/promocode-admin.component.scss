@@ -1,0 +1,56 @@
+/* General button styling with square corners */
+.btn {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    padding: 6px 12px; /* Adequate padding for a compact look */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* No underline */
+    display: inline-block; /* Inline display for side-by-side arrangement */
+    font-size: 14px; /* Standard font size */
+    transition-duration: 0.4s; /* Smooth transition for hover effects */
+    cursor: pointer; /* Pointer cursor to indicate clickable */
+    border-radius: 5px; /* Mildly rounded corners for a subtle effect */
+    width: auto; /* Auto width to fit the content */
+  }
+  
+  .btn i {
+    margin-right: 3px; /* Small space between icon and text */
+  }
+  
+  .btn:hover {
+    background-color: white; /* White background on hover */
+    color: black; /* Black text on hover */
+    border: 1px solid black; /* Adding a border on hover for better visibility */
+  }
+  
+  /* Maintain other container and element styles */
+  .container-fluid {
+    background-color: #f5f5f5; /* Light grey background */
+    padding: 50px 0; /* Vertical padding */
+  }
+  
+  .list-group-item {
+    border: none; /* No borders */
+    margin-bottom: 15px; /* Space between items */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    border-radius: 10px; /* Rounded corners for aesthetics */
+  }
+  
+  h2 {
+    color: #333; /* Dark grey for header text */
+  }
+  
+  .card-title {
+    color: #007BFF; /* Blue for title text */
+  }
+  
+  .card-text {
+    color: #666; /* Medium grey for other text */
+  }
+  
+  .d-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, auto)); /* Ensure buttons are not too wide */
+    gap: 10px; /* Space between buttons */
+  }
+  

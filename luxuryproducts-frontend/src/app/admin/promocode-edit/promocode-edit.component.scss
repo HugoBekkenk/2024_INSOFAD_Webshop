@@ -1,0 +1,65 @@
+.btn {
+    background-color: black;
+    border: 1px solid black;
+    font-size: 15px;
+    color: white;
+    padding: 6px 12px; /* Adjusted padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .btn i {
+    margin-right: 5px; /* Space between icon and text */
+  }
+  
+  .btn:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  .container-fluid {
+    background-color: #f5f5f5;
+    padding: 50px 0;
+  }
+  
+  .list-group-item {
+    border: none;
+    padding: 15px 0; /* Remove padding and border for a cleaner list look */
+    border-bottom: 1px solid #e9ecef; /* Add a bottom border to separate items */
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .card-title {
+    color: #007BFF;
+  }
+  
+  .card-text {
+    color: #666;
+  }
+  
+  .d-flex {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  form {
+    max-width: 600px;
+    margin: 0 auto; /* Center the form */
+    background-color: #fff; /* Ensure the form has a white background */
+  }
+  
+  .list-group {
+    padding: 0; /* Remove default padding */
+  }
+  
+  .list-group-item:first-child {
+    border-top: none; /* Remove top border from the first item */
+  }
+  

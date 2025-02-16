@@ -1,0 +1,47 @@
+.card-img-top {
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn {
+  background-color: black;
+  border: 1px solid black;
+  font-size: 15px;
+  color: white;
+}
+
+.btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.promo-banner {
+  background: linear-gradient(135deg, #1f1f1f 0%, #3e3e3e 100%);
+  color: #ffffff;
+  border-radius: .5rem;
+  padding: 2rem 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.promo-banner h4 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.promo-banner h2 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.promo-banner p {
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
+.promo-banner strong {
+  color: #ffeb3b; /* Bright yellow color for emphasis */
+}

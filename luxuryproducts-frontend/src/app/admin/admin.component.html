@@ -1,0 +1,366 @@
+<h3>Admin Panel</h3>
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+      <input (click)="onClickOption('products')" type="radio" name="options" id="option1" autocomplete="off" checked> Products
+    </label>
+    <label class="btn btn-secondary">
+      <input (click)="onClickOption('orders')"type="radio" name="options" id="option2" autocomplete="off"> Orders
+    </label>
+    <label class="btn btn-secondary">
+      <input (click)="onClickOption('giftcards')"type="radio" name="options" id="option3" autocomplete="off"> Gift cards
+    </label>
+    <label class="btn btn-secondary">
+        <input [routerLink]="['/admin-promo-admin']" type="radio" name="options" id="option4" autocomplete="off"> Promo codes
+      </label>
+  </div>
+  @if (showProducts) {
+    <div class="card">
+        <hr>
+    @if(addingProduct){
+      <h2 style="align-self: center;">Product to add:</h2>
+      <div class="container mt-5">
+        <form [formGroup]="productForm" style="width: 100%">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="form-outline">
+                <input type="text" id="form1.1" class="form-control" placeholder="name" formControlName="name" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-outline">
+                <input type="text" id="form1.2" class="form-control" placeholder="category" formControlName="category" required>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-4">
+              <div class="form-outline">
+                <input type="number" id="form2.1" class="form-control" placeholder="price" formControlName="price" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-outline">
+                <input type="text" id="form2.2" class="form-control" placeholder="releaseDate" formControlName="releaseDate">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-outline">
+                <input type="number" id="form2.3" class="form-control" placeholder="stock" formControlName="stock" required>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="form-outline">
+                <input type="text" id="form3.1" class="form-control" placeholder="imgURL" formControlName="imgURL" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-outline">
+                <input type="text" id="form3.2" class="form-control" placeholder="publisher" formControlName="publisher" required>
+              </div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="form-outline">
+              <textarea class="form-control" id="form4.1" rows="4" placeholder="description" formControlName="description"></textarea>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="form-outline">
+              <textarea class="form-control" id="form4.2" rows="4" placeholder="specifications" formControlName="specifications"></textarea>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-4">
+              <div class="form-outline">
+                <input type="text" id="form5.1" class="form-control" placeholder="variant" formControlName="variant" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-outline">
+                <input type="text" id="form5.2" class="form-control" placeholder="option" formControlName="option">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-outline">
+                <input type="number" id="form5.3" class="form-control" placeholder="price added" formControlName="priceAdded" required>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md text-end">
+              <button [disabled]="!productForm.valid" type="button" id="createProduct" class="btn btn-success btn-block" (click)="onSubmitProductForm()">
+                Add product <i class="bi bi-plus"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    }@else {
+      <button (click)="onCLickAddProduct()" class="btn btn-lg btn-success" id="addProduct" style="width: 50%; align-self: center;">Add product <i class="bi bi-plus"></i></button>
+      <hr>
+    @if (!loadingProducts) {
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" >
+      <label class="btn btn-secondary active">
+        <input (click)="onFilterProducts()" type="radio" name="options" id="filterOption1" autocomplete="off" checked > Products
+      </label>
+      <label class="btn btn-secondary">
+        <input (click)="onFilterGiftcards()"type="radio" name="options" id="filterOption2" autocomplete="off" > Gift cards
+      </label>
+    </div>
+        @for (product of filteredProducts; track $index) {
+            <div class="card bg-light py-3" id="product-card{{$index}}">
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-md-4 col-lg-3 mb-4 mb-md-0">
+                      <img width="500" src="{{ product.imgURL }}" id="productImage{{product.id}}"class="img-fluid rounded-start" style="max-width: 100%;" alt="product image">
+                    </div>
+                    <div class="d-flex flex-wrap col-md-9 col-md-9 ">
+                    <div class="col-md-12 col-md-12" style="margin-left: auto; margin-right: auto;">
+                      <h5 id="productName{{product.id}}">{{ product.name }}</h5>
+                      <p id="productDescription{{product.id}}">{{ product.description }}</p>
+                      <p id="productPrice{{product.id}}">{{ product.price | currency: 'EUR' }}</p>
+                    </div>
+                    
+                        @for (variant of product.variants; track $index) {
+                            <div class="card col-md-3 col-md-3 mb-4 mb-md-0" style="margin: 1em; margin-left: auto; margin-right: auto;">
+                              <div class="d-flex" id="variant{{product.id}}-{{variant.id}}" style="margin-left: 1em; margin-top: 1em;">
+                                <h6>{{ variant.name }}:</h6>
+                                <button (click)="onCLickRemoveVariant(variant.id, product.variants)" class="btn btn-sm btn-light " id="removeVariant{{variant.id}}"style="margin-left: auto; margin-bottom: 1em; margin-right: 0.5em;"><i class="bi bi-dash"></i></button>
+                              </div>
+                            @for (option of variant.options; track $index) {
+                              <div class="d-flex" id="option{{variant.id}}-{{option.id}}">
+                                <p ><i class="bi bi-dash"></i> {{option.name}} +{{option.priceAdded | currency: 'EUR'}}</p>
+                                <button (click)="onCLickRemoveOption(option.id, variant.options)" class="btn btn-sm btn-light" id="removeOption{{option.id}}" style="margin-left: auto; margin-bottom: 0.5em; margin-right: 0.5em;"><i class="bi bi-dash"></i></button>
+                              </div>
+                            }
+                            <button (click)="onClickAddOption()" class="btn btn-sm btn-success" id="addOption{{variant.id}}" style="margin-bottom: 0.5em; margin-top: auto;">Add option <i class="bi bi-plus"></i></button>
+                            @if (addingOption) {
+      <div class="container mt-5">
+        <form [formGroup]="optionForm" style="width: 100%;">
+            <div class="col-md-12">
+              <div class="form-outline">
+                <input type="text" id="form1.1-{{variant.id}}" class="form-control" placeholder="name" formControlName="name" required>
+              </div>
+            </div>
+            <div class="col-md-12" style="margin-top: 1em; margin-bottom: 1em;">
+              <div class="form-outline">
+                <input type="number" id="form1.2-{{variant.id}}" class="form-control" placeholder="price added" formControlName="priceAdded" required>
+              </div>
+            </div>
+          <div class="row mb-4">
+            <div class="col-md text-end">
+              <button [disabled]="!optionForm.valid" type="button" class="btn btn-sm btn-success btn-block" id="createOption{{variant.id}}" (click)="onSubmitOptionForm(variant.id)">
+                Add Option <i class="bi bi-plus"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+                            }
+                        </div>
+                          }
+                    
+                </div>
+              </div>
+                    <div class="row" style="margin-top: 1em;">
+                        @if (product.type === "giftcard"){
+                          <button (click)="onRemoveProduct(product)" class="btn btn-danger" id="removeProduct{{$index}}" style="width: 30%; margin-right: auto; margin-left: auto;">Remove gift card <i class="bi bi-dash"></i></button>
+                        } @else {
+                          <button (click)="onRemoveProduct(product)" class="btn btn-danger" id="removeProduct{{$index}}" style="width: 30%; margin-right: auto; margin-left: auto;">Remove product <i class="bi bi-dash"></i></button>
+                          <button (click)="onClickAddVariant()" id="addVariant{{product.id}}" class="btn btn-success"  style="width: 30%; margin-right: auto; margin-left: auto;">Add variant <i class="bi bi-plus"></i></button>
+                        }
+                    </div>
+                    @if (addingVariant) {
+                      <div class="container mt-5">
+                        <form [formGroup]="variantForm" style="width: 100%">
+                          <div class="row mb-4">
+                            <div class="col-md-4">
+                              <div class="form-outline">
+                                <input type="text" id="form1.1-{{product.id}}" class="form-control" placeholder="variant" formControlName="name" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-outline">
+                                <input type="text" id="form1.2-{{product.id}}" class="form-control" placeholder="option" formControlName="option">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-outline">
+                                <input type="number" id="form1.3-{{product.id}}" class="form-control" placeholder="price added" formControlName="priceAdded" required>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <div class="col-md text-end">
+                              <button [disabled]="!variantForm.valid" type="button" id="createVariant{{product.id}}" class="btn btn-sm btn-success btn-block" (click)="onSubmitVariantForm(product.id)">
+                                Add Variant <i class="bi bi-plus"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                                            }
+                  </div>
+                </div>
+              
+              <hr>
+        }
+    }
+  }
+</div>
+}@else if (showOrders) {
+  <hr>
+    @if (!loadingOrders) {
+        @if (!ordersPresent) {
+            <h1 class="text-center">No Orders placed yet</h1>
+          } @else {
+            <h3>Total amount of orders placed: {{orders.length}}</h3>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <h4 class="text-center">All order placed:</h4>
+        @for (order of orders; track $index) {
+          <div class="orders-container">
+            <div class="order">
+                <div class="order-details">
+                  <p class="order-info"><span class="fw-bold">Order ID:</span> {{order.id}}</p>
+                  <p class="order-info"><span class="fw-bold">Order Date:</span> {{order.orderDate | date: 'medium'}}</p>
+                  <p class="order-info"><span class="fw-bold">Order Email:</span> {{order.user.email}}</p>
+                  <div class="customer-info">
+                    <h5><span class="fw-bold">Order Information</span></h5>
+                    <p><span class="fw-bold">Name:</span> {{order.name}} {{order.infix}} {{order.last_name}}</p>
+                    <p><span class="fw-bold">Address:</span> {{order.houseNumber}}, {{order.zipcode}}</p>
+                    <p><span class="fw-bold">Notes:</span> {{order.notes}}</p>
+                  </div>
+                  <ul class="products-list">
+                    <li class="product" *ngFor="let product of order.products">
+                      <div class="product-details">
+                        <p class="product-name"><span class="fw-bold">Product Name:</span> {{product.name}}</p>
+                        <li class="variants-list">
+                        @for (variant of product.variants; track $index) {
+                          <p class="varaint-name"><span class="fw-bold">{{variant.variantName}}:</span> {{variant.selectedOptionName}}</p>
+                        }
+                        </li>
+                        <p class="product-price"><span class="fw-bold">Price:</span> {{ calculateProductPrice(product) | currency: 'EUR'}}</p>
+                      </div>
+                      <div class="product-image">
+                        <img src="{{product.imgURL }}" alt="{{product.name}}">
+                      </div>
+                    </li>
+                  </ul>
+                  <hr>
+                  <p class="order-total"><span class="fw-bold">Subtotal price:</span> {{ order.totalPrice| currency: 'EUR' }}</p>
+            @if (order.discountedPrice != 0 && order.discountedPrice != order.totalPrice) {
+              <p class="order-total"><span class="fw-bold">Subtotal dicounted price:</span> {{ order.discountedPrice| currency: 'EUR' }}</p>
+            }
+            <p *ngIf="order.paidAmountByGiftCard != undefined && order.paidAmountByGiftCard != 0" class="order-total"><span class="fw-bold">Total price added Giftcards:</span> {{ order.paidAmountByGiftCard | currency: 'EUR' }}</p>
+            @if (order.discountedPrice != 0) {
+              <p class="order-total"><span class="fw-bold">Total price:</span> {{ order.discountedPrice - order.paidAmountByGiftCard | currency: 'EUR' }}</p>
+            }@else {
+              <p class="order-total"><span class="fw-bold">Total price:</span> {{ order.totalPrice - order.paidAmountByGiftCard | currency: 'EUR' }}</p>
+            }
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+    } @else {
+        <h3>Loading orders</h3>
+    }
+}@if (showGiftcard) {
+  <hr>
+  @if (loadingGiftCards) {
+  <p>Loading gifcards...</p>
+} @else {
+  <form [formGroup]="bestelForm" style="width: 100%">
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="form-outline">
+          <input type="text" id="form1.1" class="form-control" placeholder="Name" formControlName="name" required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-outline">
+          <input type="number" id="form1.2" class="form-control" placeholder="Amount" formControlName="amount" required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-outline">
+          <input type="text" id="form1.3" class="form-control" placeholder="Image URL" formControlName="image">
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md text-end">
+        <button  [disabled]="!bestelForm.valid" type="button" class="button btn btn-primary btn-block" (click)="onSubmitGiftCardForm()">
+          Add Gift Card
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="gift-card-container">
+    <h2>Gift Cards</h2>
+    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Code</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (card of giftCards; track $index) {
+          <tr>
+            <td>{{ card.name }}</td>
+            <td>{{ card.amount }}</td>
+            <td>{{ card.cardCode }}</td>
+            <td><img [src]="card.image" class="gift-card-img" alt="Gift Card Image"></td>
+            <td>
+              <button class="button" (click)="deleteCard(card.id)">Delete</button>
+            </td>
+          </tr>    
+  }
+</tbody>
+</table>
+</div>
+</div>
+<div class="gift-card-container">
+  <h2>Users Gift Cards Details</h2>
+  <div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Amount</th>
+        <th>Send By</th>
+        <th>Recieved By</th>
+      </tr>
+    </thead>
+    <tbody>
+@for (uc of userGiftCards; track $index) {
+      <tr>
+        <td>{{ uc.giftCard.name }}</td>
+        <td>{{ uc.giftCard.cardCode }}</td>
+        <td>{{ uc.giftCard.amount }}</td>
+        <td>{{ uc.sendBy.name }}</td>
+        <td>{{ uc.receivedBy.name }}</td>
+      </tr>    
+}
+</tbody>
+</table>
+  </div>
+</div>
+}
+<hr>
+}
+  
+

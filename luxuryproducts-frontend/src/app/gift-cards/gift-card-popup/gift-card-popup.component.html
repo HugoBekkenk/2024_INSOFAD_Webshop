@@ -1,0 +1,9 @@
+<div class="popup" *ngIf="isModalOpen">
+    <h2>Send Gift Card to User</h2>
+    <form (ngSubmit)="onSubmit($event)">
+      <input type="email" name="email" [(ngModel)]="email" placeholder="example@example.com">
+      <button type="submit">Submit</button>
+    </form>
+ </div>
+  
+  

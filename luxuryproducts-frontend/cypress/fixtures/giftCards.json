@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "name": "Gift Card 1",
+        "amount": 10.0,
+        "image": "https://shop.moyu-notebooks.com/cdn/shop/files/moyu-gift-card-10-euros.png?v=1694888807",
+        "cardCode": "GCRZ?FRT$!6X"
+    },
+    {
+        "id": 2,
+        "name": "Gift Card 2",
+        "amount": 20.0,
+        "image": "https://rideoo.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/g/i/gift-card-20-eur-compressor.jpg",
+        "cardCode": "GCLPSYIRCM)!"
+    },
+    {
+        "id": 3,
+        "name": "Gift Card 3",
+        "amount": 30.0,
+        "image": "https://shop.moyu-notebooks.com/cdn/shop/files/moyu-gift-card-30-euros.png?v=1701787386&width=600",
+        "cardCode": "GC5OLMB6$>$J"
+    },
+    {
+        "id": 4,
+        "name": "Gift Card 4",
+        "amount": 40.0,
+        "image": "https://creativelix.com/wp-content/uploads/2023/10/Gift-Card-40-euro-creativelix-BWLFCREATIVELIX.webp",
+        "cardCode": "GCJQPXKUZZ4G"
+    },
+    {
+        "id": 5,
+        "name": "Gift Card 5",
+        "amount": 50.0,
+        "image": "https://data.outletmoto.eu/imgprodotto/gift-for-aquisto-of-50-euro_15085_zoom.jpg",
+        "cardCode": "GC6L3QG^GY#!"
+    },
+    {
+        "id": 6,
+        "name": "Gift Card 6",
+        "amount": 60.0,
+        "image": "https://www.iris-cayeux.com/5644-large_default/gift-card-60.jpg",
+        "cardCode": "GCZOUAO&#3Y0"
+    },
+    {
+        "id": 7,
+        "name": "Gift Card 7",
+        "amount": 75.0,
+        "image": "https://by-rofayda.nl/wp-content/uploads/2023/09/75.jpg",
+        "cardCode": "GCIPHJ4^&VQY"
+    },
+    {
+        "id": 8,
+        "name": "Gift Card 8",
+        "amount": 100.0,
+        "image": "https://by-rofayda.nl/wp-content/uploads/2023/09/100.jpg",
+        "cardCode": "GC9S2B8)FGBY"
+    },
+    {
+        "id": 9,
+        "name": "Gift Card 9",
+        "amount": 150.0,
+        "image": "https://by-rofayda.nl/wp-content/uploads/2023/09/150.jpg",
+        "cardCode": "GC!VB{XNORTE"
+    },
+    {
+        "id": 10,
+        "name": "Gift Card 10",
+        "amount": 200.0,
+        "image": "https://danishgallery.com/cdn/shop/products/giftcard200_2048x2048.jpg?v=1547198614",
+        "cardCode": "GCKFEWU6J#^E"
+    }
+]

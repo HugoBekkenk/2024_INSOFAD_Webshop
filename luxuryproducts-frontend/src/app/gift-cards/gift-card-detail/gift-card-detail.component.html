@@ -1,0 +1,19 @@
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <div class="product-image-container bg-white p-4 shadow-sm rounded">
+            <img class="card-img-top img-fluid" src="{{ giftCard.image }}" alt="Gift Card Image"/>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="product-details-container bg-white p-4 shadow-sm rounded">
+            <h1 class="display-4 fw-bold mb-4">{{ giftCard.name }}</h1>
+            <p class="lead mb-4"><span class="fw-bold">Price:</span> {{ giftCard.amount}} EUR</p>
+            <button (click)="onBuyGiftCard(giftCard)" class="btn btn-primary">Send Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

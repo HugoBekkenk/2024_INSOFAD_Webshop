@@ -1,0 +1,16 @@
+<h3 class="mb-4">All Games</h3>
+<div class="btn-group btn-group-toggle" data-toggle="buttons" >
+  <label class="btn btn-secondary active">
+    <input (click)="onFilterProducts()" type="radio" name="options" id="filterOption1" autocomplete="off" > Products
+  </label>
+  <label class="btn btn-secondary">
+    <input (click)="onFilterGiftcards()"type="radio" name="options" id="filterOption2" autocomplete="off" > Gift cards
+  </label>
+</div>
+@if (loadingProducts) {
+  <p>Loading products...</p>
+} @else {
+  @for (product of filteredProducts; track $index) {
+    <app-product-thumbnail [product]="product"></app-product-thumbnail>
+  }
+}
